@@ -584,6 +584,59 @@
           <strong>Resumo Financeiro da Rodada (${meuClube.nome}):</strong><br>
           ${bilheteriaMeuClube > 0 ? `<span class="text-success">+ Bilheteria: ${formatarMoeda(bilheteriaMeuClube)}</span><br>` : ''}
           <span class="text-danger">- Folha Salarial: ${formatarMoeda(folha)}</span>
+
+           <!-- ADICIONE ESTE BLOCO INTEIRO ANTES DE FECHAR A <div class="tab-content"> -->
+        <div class="tab-pane fade" id="tab-editor">
+          <div class="row g-4">
+            <!-- PAINEL DE IMPORTAÇÃO / EXPORTAÇÃO CSV -->
+            <div class="col-lg-5">
+              <div class="card p-3 h-100">
+                <h5 class="text-warning mb-3">📂 Repositório CSV (Backup & Carga)</h5>
+                <p class="small text-secondary">
+                  Exporte a base atual para editar no Excel/Google Sheets ou importe um arquivo <code>.csv</code> para atualizar os jogadores.
+                </p>
+                
+                <div class="d-grid gap-2 mb-4">
+                  <button class="btn btn-outline-info fw-bold" onclick="exportarCSV()">⬇️ Baixar Base Atual (.CSV)</button>
+                </div>
+
+                <hr class="border-secondary">
+
+                <label class="form-label fw-bold small">Importar Arquivo CSV de Jogadores:</label>
+                <input type="file" id="input-csv" accept=".csv" class="form-control form-control-sm bg-dark text-white border-secondary mb-2">
+                <small class="text-secondary d-block mb-3">
+                  Colunas obrigatórias (separadas por ponto e vírgula <code>;</code> ou vírgula <code>,</code>):<br>
+                  <code>clube_id;nome;pos;forca;salario;passe</code>
+                </small>
+                <button class="btn btn-warning fw-bold w-100" onclick="importarCSV()">⬆️ Atualizar Base via CSV</button>
+              </div>
+            </div>
+
+            <!-- PAINEL DE EDIÇÃO RÁPIDA NA TELA -->
+            <div class="col-lg-7">
+              <div class="card p-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="mb-0">✏️ Edição Rápida de Elencos</h5>
+                  <select id="filtro-clube-editor" class="form-select form-select-sm w-auto bg-dark text-white border-secondary" onchange="renderizarEditor()"></select>
+                </div>
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                  <table class="table table-sm table-hover align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Pos</th>
+                        <th>Força</th>
+                        <th>Passe (R$)</th>
+                        <th>Salvar</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tabela-editor-jogadores"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       `;
 
@@ -608,6 +661,137 @@
     }
 
     renderizarSelecao();
+
+   <!-- Importador CSV de Times -->
+<ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+  <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-elenco">📋 Elenco & Escalação</button></li>
+  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-tabela">🏆 Classificação & Jogos</button></li>
+  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-mercado">💰 Mercado de Passes</button></li>
+  <!-- ADICIONE ESTA LINHA ABAIXO -->
+  <li class="nav-item"><button class="nav-link text-warning" data-bs-toggle="pill" data-bs-target="#tab-editor" onclick="renderizarEditor()">⚙️ Editor / CSV</button></li>
+</ul>
+
+    6. EDITOR DE TIMES E IMPORTAÇÃO/EXPORTAÇÃO CSV
+    // ==========================================
+    function renderizarEditor() {
+      const selectClube = document.getElementById('filtro-clube-editor');
+      if (selectClube.options.length === 0) {
+        selectClube.innerHTML = clubes.map(c => `<option value="${c.id}">${c.id} - ${c.nome}</option>`).join('');
+      }
+
+      const clubeSelecionadoId = parseInt(selectClube.value) || clubes[0].id;
+      const lista = jogadores.filter(j => j.clubeId === clubeSelecionadoId);
+
+      document.getElementById('tabela-editor-jogadores').innerHTML = lista.map(j => `
+        <tr>
+          <td><input type="text" id="edit-nome-${j.id}" class="form-control form-control-sm bg-dark text-white border-secondary" value="${j.nome}"></td>
+          <td>
+            <select id="edit-pos-${j.id}" class="form-select form-select-sm bg-dark text-white border-secondary">
+              <option value="GOL" ${j.pos === 'GOL' ? 'selected' : ''}>GOL</option>
+              <option value="ZAG" ${j.pos === 'ZAG' ? 'selected' : ''}>ZAG</option>
+              <option value="MEI" ${j.pos === 'MEI' ? 'selected' : ''}>MEI</option>
+              <option value="ATA" ${j.pos === 'ATA' ? 'selected' : ''}>ATA</option>
+            </select>
+          </td>
+          <td style="width: 75px;"><input type="number" id="edit-forca-${j.id}" min="1" max="99" class="form-control form-control-sm bg-dark text-white border-secondary" value="${j.forca}"></td>
+          <td style="width: 115px;"><input type="number" id="edit-passe-${j.id}" class="form-control form-control-sm bg-dark text-white border-secondary" value="${j.passe}"></td>
+          <td><button class="btn btn-sm btn-success" onclick="salvarEdicaoJogador(${j.id})">💾</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function salvarEdicaoJogador(id) {
+      const jogador = jogadores.find(j => j.id === id);
+      jogador.nome = document.getElementById(`edit-nome-${id}`).value.trim();
+      jogador.pos = document.getElementById(`edit-pos-${id}`).value;
+      jogador.forca = parseInt(document.getElementById(`edit-forca-${id}`).value) || 50;
+      jogador.passe = parseInt(document.getElementById(`edit-passe-${id}`).value) || 100000;
+      
+      atualizarTela();
+      alert(`Jogador ${jogador.nome} atualizado com sucesso!`);
+    }
+
+    function exportarCSV() {
+      // Cabeçalho compatível com Excel em Português (separador ;)
+      let csv = "clube_id;nome;pos;forca;salario;passe\n";
+      jogadores.forEach(j => {
+        csv += `${j.clubeId};${j.nome};${j.pos};${j.forca};${j.salario};${j.passe}\n`;
+      });
+
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "base_jogadores_elifoot98.csv";
+      link.click();
+    }
+
+    function importarCSV() {
+      const input = document.getElementById('input-csv');
+      if (!input.files || !input.files[0]) {
+        alert("Selecione um arquivo .csv primeiro!");
+        return;
+      }
+
+      const leitor = new FileReader();
+      leitor.onload = function(e) {
+        const conteudo = e.target.result;
+        const linhas = conteudo.split(/\r?\n/).filter(l => l.trim() !== "");
+        
+        if (linhas.length < 2) {
+          alert("O arquivo CSV está vazio ou sem dados.");
+          return;
+        }
+
+        // Detecta automaticamente se o separador é ; ou ,
+        const separador = linhas[0].includes(';') ? ';' : ',';
+        const novosJogadores = [];
+        let proximoId = 1000;
+
+        // Pula a linha 0 (cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+          const colunas = linhas[i].split(separador);
+          if (colunas.length >= 6) {
+            const clubeId = parseInt(colunas[0].trim());
+            const nome = colunas[1].trim();
+            const pos = colunas[2].trim().toUpperCase();
+            const forca = parseInt(colunas[3].trim());
+            const salario = parseInt(colunas[4].trim());
+            const passe = parseInt(colunas[5].trim());
+
+            if (!isNaN(clubeId) && nome && ["GOL", "ZAG", "MEI", "ATA"].includes(pos)) {
+              novosJogadores.push({
+                id: proximoId++,
+                clubeId: clubeId,
+                nome: nome,
+                pos: pos,
+                forca: forca || 70,
+                salario: salario || 20000,
+                passe: passe || 500000,
+                titular: false
+              });
+            }
+          }
+        }
+
+        if (novosJogadores.length > 0) {
+          // Substitui a base atual e define os 11 primeiros de cada time como titulares
+          jogadores = novosJogadores;
+          clubes.forEach(c => {
+            const elencoClube = jogadores.filter(j => j.clubeId === c.id);
+            elencoClube.slice(0, 11).forEach(j => j.titular = true);
+          });
+
+          atualizarTela();
+          renderizarEditor();
+          alert(`${novosJogadores.length} jogadores importados com sucesso!`);
+        } else {
+          alert("Nenhum jogador válido encontrado. Verifique o formato das colunas.");
+        }
+      };
+
+      leitor.readAsText(input.files[0], 'UTF-8');
+    }
   </script>
 </body>
 </html>
