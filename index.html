@@ -4,97 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elifoot 98 Web - Protótipo MVP</title>
+  <link href="https://jsdelivr.net" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: #121820; color: #e9ecef; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.5; }
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 16px; }
-    .d-none { display: none !important; }
-    .py-5 { padding-top: 3rem; padding-bottom: 3rem; }
-    .pb-5 { padding-bottom: 3rem; }
-    .mb-0 { margin-bottom: 0; }
-    .mb-1 { margin-bottom: 0.25rem; }
-    .mb-2 { margin-bottom: 0.5rem; }
-    .mb-3 { margin-bottom: 1rem; }
-    .mb-4 { margin-bottom: 1.5rem; }
-    .mb-5 { margin-bottom: 3rem; }
-    .mt-2 { margin-top: 0.5rem; }
-    .mt-auto { margin-top: auto; }
-    .p-3 { padding: 1rem; }
-    .p-4 { padding: 1.5rem; }
-    .text-center { text-align: center; }
-    .text-end { text-align: right; }
-    .fw-bold { font-weight: 700; }
-    .fw-semibold { font-weight: 600; }
-    .small { font-size: 0.875rem; }
-    .fs-5 { font-size: 1.25rem; }
-    .display-5 { font-size: 2.5rem; }
-    .lead { font-size: 1.15rem; }
-    .text-success { color: #20c997; }
-    .text-secondary { color: #adb5bd; }
-    .text-info { color: #0dcaf0; }
-    .text-warning { color: #ffc107; }
-    .text-danger { color: #ff6b6b; }
-    .text-dark { color: #000; }
-    .d-block { display: block; }
-    .d-flex { display: flex; }
-    .flex-wrap { flex-wrap: wrap; }
-    .justify-content-between { justify-content: space-between; }
-    .align-items-center { align-items: center; }
-    .gap-3 { gap: 1rem; }
-    .gap-4 { gap: 1.5rem; }
-    .w-100 { width: 100%; }
-    .h-100 { height: 100%; }
-
-    .grid-clubes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-    .grid-tabela { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
-    @media (max-width: 768px) { .grid-tabela { grid-template-columns: 1fr; } }
-
-    .card { background-color: #1c2532; border: 1px solid #2d3a4b; border-radius: 8px; color: #fff; display: flex; flex-direction: column; }
-    .header-bar { background-color: #0d1218; border-bottom: 2px solid #198754; padding: 15px 0; }
-
-    .btn { display: inline-block; font-weight: 600; text-align: center; cursor: pointer; border: 1px solid transparent; padding: 0.45rem 0.9rem; font-size: 0.95rem; border-radius: 6px; transition: 0.15s; text-decoration: none; }
-    .btn-sm { padding: 0.25rem 0.6rem; font-size: 0.85rem; }
-    .btn-lg { padding: 0.65rem 1.25rem; font-size: 1.05rem; }
-    .btn-success { background-color: #198754; color: #fff; }
-    .btn-success:hover { background-color: #157347; }
-    .btn-outline-success { background-color: transparent; border-color: #198754; color: #20c997; }
-    .btn-outline-success:hover { background-color: #198754; color: #fff; }
-    .btn-outline-warning { background-color: transparent; border-color: #ffc107; color: #ffc107; }
-    .btn-outline-warning:hover { background-color: #ffc107; color: #000; }
-    .btn-secondary { background-color: #495057; color: #adb5bd; cursor: not-allowed; }
-
-    .nav-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; }
-    .nav-link { background-color: #1c2532; color: #adb5bd; border: 1px solid #2d3a4b; padding: 0.55rem 1.1rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
-    .nav-link.active { background-color: #0d6efd; color: #fff; border-color: #0d6efd; }
-
-    .table-responsive { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 0.7rem 0.65rem; border-bottom: 1px solid #2d3a4b; vertical-align: middle; }
-    th { color: #adb5bd; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
-    tbody tr:hover { background-color: #263344; }
-    .titular-row { background-color: rgba(25, 135, 84, 0.25) !important; }
-    .table-active { background-color: rgba(13, 110, 253, 0.2); }
-
-    .badge { display: inline-block; padding: 0.25em 0.55em; font-size: 0.78rem; font-weight: 700; border-radius: 4px; }
-    .badge-pos { width: 45px; text-align: center; }
+    body { background-color: #121820; color: #e9ecef; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .card { background-color: #1c2532; border: 1px solid #2d3a4b; color: #fff; }
+    .table { color: #e9ecef; }
+    .table-hover tbody tr:hover { color: #fff; background-color: #263344; }
+    .badge-pos { width: 45px; display: inline-block; text-align: center; }
     .pos-GOL { background-color: #ffc107; color: #000; }
     .pos-ZAG { background-color: #0dcaf0; color: #000; }
     .pos-MEI { background-color: #198754; color: #fff; }
     .pos-ATA { background-color: #dc3545; color: #fff; }
-    .bg-info { background-color: #0dcaf0; }
-    .bg-secondary { background-color: #495057; color: #fff; }
-    .bg-success { background-color: #198754; color: #fff; }
-
-    input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: #198754; }
-
-    /* Modal */
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
-    .modal-box { background-color: #1c2532; border: 1px solid #495057; border-radius: 8px; width: 100%; max-width: 680px; max-height: 90vh; overflow-y: auto; }
-    .modal-header, .modal-footer { padding: 1rem 1.25rem; border-bottom: 1px solid #2d3a4b; display: flex; justify-content: space-between; align-items: center; }
-    .modal-footer { border-bottom: none; border-top: 1px solid #2d3a4b; justify-content: flex-end; }
-    .modal-body { padding: 1.25rem; }
-    .result-box { border: 1px solid #3b4a5e; border-radius: 6px; padding: 0.85rem 1rem; margin-bottom: 0.85rem; background-color: #131a24; }
-    .alert-box { background-color: #263344; border: 1px solid #3b4a5e; border-radius: 6px; padding: 0.85rem 1rem; }
+    .titular-row { background-color: rgba(25, 135, 84, 0.25) !important; }
+    .header-bar { background-color: #0d1218; border-bottom: 2px solid #198754; padding: 15px 0; }
   </style>
 </head>
 <body>
@@ -102,22 +24,22 @@
   <!-- TELA 1: SELEÇÃO DE CLUBE -->
   <div id="tela-selecao" class="container py-5">
     <div class="text-center mb-5">
-      <h1 class="display-5 fw-bold text-success mb-2">⚽ ELIFOOT 98 - WEB MVP</h1>
+      <h1 class="display-5 fw-bold text-success">⚽ ELIFOOT 98 - WEB MVP</h1>
       <p class="lead text-secondary">Escolha seu clube para iniciar sua carreira como treinador</p>
     </div>
-    <div class="grid-clubes" id="lista-clubes-iniciais"></div>
+    <div class="row g-4" id="lista-clubes-iniciais"></div>
   </div>
 
   <!-- TELA 2: DASHBOARD DO JOGO -->
   <div id="tela-jogo" class="d-none">
     <!-- Barra Superior -->
     <div class="header-bar mb-4">
-      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center">
         <div>
-          <h2 class="mb-0 fw-bold" id="nome-meu-clube">Clube</h2>
+          <h3 class="mb-0 fw-bold" id="nome-meu-clube">Clube</h3>
           <small class="text-secondary" id="info-estadio">Estádio • Rodada 1</small>
         </div>
-        <div class="d-flex flex-wrap gap-4 align-items-center">
+        <div class="d-flex gap-4 align-items-center mt-2 mt-md-0">
           <div class="text-end">
             <small class="text-secondary d-block">Saldo em Caixa</small>
             <span class="fs-5 fw-bold text-success" id="caixa-clube">R$ 0</span>
@@ -133,462 +55,98 @@
 
     <div class="container pb-5">
       <!-- Abas de Navegação -->
-      <div class="nav-pills mb-4">
-        <button class="nav-link active" id="btn-tab-elenco" onclick="trocarAba('elenco')">📋 Elenco & Escalação</button>
-        <button class="nav-link" id="btn-tab-tabela" onclick="trocarAba('tabela')">🏆 Classificação & Jogos</button>
-        <button class="nav-link" id="btn-tab-mercado" onclick="trocarAba('mercado')">💰 Mercado de Passes</button>
-      </div>
+      <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-elenco">📋 Elenco & Escalação</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-tabela">🏆 Classificação & Jogos</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-mercado">💰 Mercado de Passes</button></li>
+        <li class="nav-item"><button class="nav-link text-warning" data-bs-toggle="pill" data-bs-target="#tab-editor" onclick="renderizarEditor()">⚙️ Editor / CSV</button></li>
+      </ul>
 
-      <!-- ABA 1: ELENCO -->
-      <div id="tab-elenco">
-        <div class="card p-3">
-          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-            <h3 class="mb-0">Selecione os 11 Titulares (<span id="contador-titulares" class="text-warning">0/11</span>)</h3>
-            <small class="text-secondary">Folha Salarial/Rodada: <strong id="folha-salarial" class="text-danger">R$ 0</strong></small>
-          </div>
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Escalar</th>
-                  <th>Pos</th>
-                  <th>Jogador</th>
-                  <th>Força</th>
-                  <th>Salário</th>
-                  <th>Passe</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="tabela-meu-elenco"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ABA 2: CLASSIFICAÇÃO -->
-      <div id="tab-tabela" class="d-none">
-        <div class="grid-tabela">
+      <div class="tab-content">
+        <!-- ABA 1: ELENCO -->
+        <div class="tab-pane fade show active" id="tab-elenco">
           <div class="card p-3">
-            <h3 class="mb-3">Tabela do Campeonato</h3>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="mb-0">Selecione os 11 Titulares (<span id="contador-titulares" class="text-warning">0/11</span>)</h5>
+              <small class="text-secondary">Folha Salarial/Rodada: <strong id="folha-salarial" class="text-danger">R$ 0</strong></small>
+            </div>
             <div class="table-responsive">
-              <table>
+              <table class="table table-hover align-middle mb-0">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Clube</th>
-                    <th>P</th>
-                    <th>J</th>
-                    <th>V</th>
-                    <th>E</th>
-                    <th>D</th>
-                    <th>SG</th>
+                    <th>Escalar</th>
+                    <th>Pos</th>
+                    <th>Jogador</th>
+                    <th>Força</th>
+                    <th>Salário</th>
+                    <th>Passe</th>
+                    <th>Ação</th>
                   </tr>
                 </thead>
-                <tbody id="corpo-classificacao"></tbody>
+                <tbody id="tabela-meu-elenco"></tbody>
               </table>
             </div>
           </div>
+        </div>
+
+        <!-- ABA 2: CLASSIFICAÇÃO -->
+        <div class="tab-pane fade" id="tab-tabela">
+          <div class="row g-4">
+            <div class="col-lg-7">
+              <div class="card p-3">
+                <h5 class="mb-3">Tabela do Campeonato</h5>
+                <table class="table table-hover align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Clube</th>
+                      <th>P</th>
+                      <th>J</th>
+                      <th>V</th>
+                      <th>E</th>
+                      <th>D</th>
+                      <th>SG</th>
+                    </tr>
+                  </thead>
+                  <tbody id="corpo-classificacao"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="card p-3">
+                <h5 class="mb-3">Últimos Resultados</h5>
+                <div id="ultimos-resultados" class="text-secondary">Nenhuma partida jogada ainda.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 3: MERCADO -->
+        <div class="tab-pane fade" id="tab-mercado">
           <div class="card p-3">
-            <h3 class="mb-3">Últimos Resultados</h3>
-            <div id="ultimos-resultados" class="text-secondary">Nenhuma partida jogada ainda.</div>
+            <h5 class="mb-3">Jogadores Disponíveis para Compra</h5>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Pos</th>
+                    <th>Jogador</th>
+                    <th>Clube Atual</th>
+                    <th>Força</th>
+                    <th>Salário</th>
+                    <th>Valor Passe</th>
+                    <th>Ação</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-mercado"></tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- ABA 3: MERCADO -->
-      <div id="tab-mercado" class="d-none">
-        <div class="card p-3">
-          <h3 class="mb-3">Jogadores Disponíveis para Compra</h3>
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Pos</th>
-                  <th>Jogador</th>
-                  <th>Clube Atual</th>
-                  <th>Força</th>
-                  <th>Salário</th>
-                  <th>Valor Passe</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="tabela-mercado"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL DE RESULTADOS DA RODADA -->
-  <div class="modal-backdrop d-none" id="modalRodada">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3 class="text-success fw-bold mb-0" id="tituloModalRodada">Resultados da Rodada</h3>
-        <button class="btn btn-sm btn-outline-warning" onclick="fecharModal()">✕</button>
-      </div>
-      <div class="modal-body" id="corpoModalRodada"></div>
-      <div class="modal-footer">
-        <button class="btn btn-success" onclick="fecharModal()">Continuar</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ==========================================
-    // 1. BANCO DE DADOS INICIAL (MOCK / REPOSITÓRIO)
-    // ==========================================
-    const clubes = [
-      { id: 1, nome: "Flamengo", estadio: "Maracanã", capacidade: 70000, caixa: 5000000, pontos: 0, jogos: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0 },
-      { id: 2, nome: "Palmeiras", estadio: "Allianz Parque", capacidade: 43000, caixa: 5200000, pontos: 0, jogos: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0 },
-      { id: 3, nome: "São Paulo", estadio: "MorumBIS", capacidade: 66000, caixa: 3800000, pontos: 0, jogos: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0 },
-      { id: 4, nome: "Botafogo", estadio: "Nilton Santos", capacidade: 44000, caixa: 4200000, pontos: 0, jogos: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0 }
-    ];
-
-    let jogadores = [
-      // Flamengo (id 1)
-      { id: 101, clubeId: 1, nome: "Rossi", pos: "GOL", forca: 82, salario: 45000, passe: 1200000, titular: true },
-      { id: 102, clubeId: 1, nome: "Léo Ortiz", pos: "ZAG", forca: 84, salario: 50000, passe: 1800000, titular: true },
-      { id: 103, clubeId: 1, nome: "Léo Pereira", pos: "ZAG", forca: 83, salario: 48000, passe: 1600000, titular: true },
-      { id: 104, clubeId: 1, nome: "Wesley", pos: "ZAG", forca: 79, salario: 30000, passe: 1100000, titular: true },
-      { id: 105, clubeId: 1, nome: "Ayrton Lucas", pos: "ZAG", forca: 80, salario: 38000, passe: 1300000, titular: true },
-      { id: 106, clubeId: 1, nome: "Pulgar", pos: "MEI", forca: 82, salario: 45000, passe: 1500000, titular: true },
-      { id: 107, clubeId: 1, nome: "De la Cruz", pos: "MEI", forca: 86, salario: 65000, passe: 2500000, titular: true },
-      { id: 108, clubeId: 1, nome: "Arrascaeta", pos: "MEI", forca: 88, salario: 75000, passe: 3000000, titular: true },
-      { id: 109, clubeId: 1, nome: "Gerson", pos: "MEI", forca: 87, salario: 70000, passe: 2800000, titular: true },
-      { id: 110, clubeId: 1, nome: "Bruno Henrique", pos: "ATA", forca: 84, salario: 60000, passe: 1900000, titular: true },
-      { id: 111, clubeId: 1, nome: "Pedro", pos: "ATA", forca: 89, salario: 80000, passe: 3500000, titular: true },
-      { id: 112, clubeId: 1, nome: "Matheus Cunha", pos: "GOL", forca: 75, salario: 20000, passe: 600000, titular: false },
-      { id: 113, clubeId: 1, nome: "Plata", pos: "ATA", forca: 81, salario: 42000, passe: 1500000, titular: false },
-
-      // Palmeiras (id 2)
-      { id: 201, clubeId: 2, nome: "Weverton", pos: "GOL", forca: 85, salario: 55000, passe: 1500000, titular: true },
-      { id: 202, clubeId: 2, nome: "Gustavo Gómez", pos: "ZAG", forca: 86, salario: 65000, passe: 2200000, titular: true },
-      { id: 203, clubeId: 2, nome: "Murilo", pos: "ZAG", forca: 83, salario: 48000, passe: 1700000, titular: true },
-      { id: 204, clubeId: 2, nome: "Mayke", pos: "ZAG", forca: 80, salario: 38000, passe: 1200000, titular: true },
-      { id: 205, clubeId: 2, nome: "Piquerez", pos: "ZAG", forca: 83, salario: 46000, passe: 1800000, titular: true },
-      { id: 206, clubeId: 2, nome: "Aníbal Moreno", pos: "MEI", forca: 83, salario: 48000, passe: 1900000, titular: true },
-      { id: 207, clubeId: 2, nome: "Richard Ríos", pos: "MEI", forca: 82, salario: 45000, passe: 2000000, titular: true },
-      { id: 208, clubeId: 2, nome: "Raphael Veiga", pos: "MEI", forca: 87, salario: 70000, passe: 2900000, titular: true },
-      { id: 209, clubeId: 2, nome: "Maurício", pos: "MEI", forca: 81, salario: 42000, passe: 1700000, titular: true },
-      { id: 210, clubeId: 2, nome: "Estêvão", pos: "ATA", forca: 88, salario: 60000, passe: 3800000, titular: true },
-      { id: 211, clubeId: 2, nome: "Flaco López", pos: "ATA", forca: 81, salario: 44000, passe: 1600000, titular: true },
-      { id: 212, clubeId: 2, nome: "Rony", pos: "ATA", forca: 79, salario: 45000, passe: 1300000, titular: false },
-
-      // São Paulo (id 3)
-      { id: 301, clubeId: 3, nome: "Rafael", pos: "GOL", forca: 81, salario: 38000, passe: 1100000, titular: true },
-      { id: 302, clubeId: 3, nome: "Arboleda", pos: "ZAG", forca: 83, salario: 46000, passe: 1500000, titular: true },
-      { id: 303, clubeId: 3, nome: "Alan Franco", pos: "ZAG", forca: 80, salario: 35000, passe: 1200000, titular: true },
-      { id: 304, clubeId: 3, nome: "Igor Vinícius", pos: "ZAG", forca: 77, salario: 28000, passe: 900000, titular: true },
-      { id: 305, clubeId: 3, nome: "Welington", pos: "ZAG", forca: 78, salario: 30000, passe: 1000000, titular: true },
-      { id: 306, clubeId: 3, nome: "Luiz Gustavo", pos: "MEI", forca: 81, salario: 42000, passe: 1000000, titular: true },
-      { id: 307, clubeId: 3, nome: "Bobadilla", pos: "MEI", forca: 79, salario: 32000, passe: 1200000, titular: true },
-      { id: 308, clubeId: 3, nome: "Lucas Moura", pos: "MEI", forca: 87, salario: 72000, passe: 2600000, titular: true },
-      { id: 309, clubeId: 3, nome: "Luciano", pos: "ATA", forca: 82, salario: 48000, passe: 1500000, titular: true },
-      { id: 310, clubeId: 3, nome: "Ferreirinha", pos: "ATA", forca: 79, salario: 35000, passe: 1300000, titular: true },
-      { id: 311, clubeId: 3, nome: "Calleri", pos: "ATA", forca: 84, salario: 58000, passe: 2100000, titular: true },
-      { id: 312, clubeId: 3, nome: "André Silva", pos: "ATA", forca: 78, salario: 30000, passe: 1100000, titular: false },
-
-      // Botafogo (id 4)
-      { id: 401, clubeId: 4, nome: "John", pos: "GOL", forca: 82, salario: 38000, passe: 1300000, titular: true },
-      { id: 402, clubeId: 4, nome: "Bastos", pos: "ZAG", forca: 82, salario: 40000, passe: 1400000, titular: true },
-      { id: 403, clubeId: 4, nome: "Barboza", pos: "ZAG", forca: 81, salario: 38000, passe: 1300000, titular: true },
-      { id: 404, clubeId: 4, nome: "Vitinho", pos: "ZAG", forca: 79, salario: 34000, passe: 1200000, titular: true },
-      { id: 405, clubeId: 4, nome: "Alex Telles", pos: "ZAG", forca: 83, salario: 55000, passe: 1700000, titular: true },
-      { id: 406, clubeId: 4, nome: "Gregore", pos: "MEI", forca: 80, salario: 36000, passe: 1200000, titular: true },
-      { id: 407, clubeId: 4, nome: "Marlon Freitas", pos: "MEI", forca: 83, salario: 46000, passe: 1700000, titular: true },
-      { id: 408, clubeId: 4, nome: "Thiago Almada", pos: "MEI", forca: 87, salario: 68000, passe: 3400000, titular: true },
-      { id: 409, clubeId: 4, nome: "Savarino", pos: "MEI", forca: 83, salario: 48000, passe: 1800000, titular: true },
-      { id: 410, clubeId: 4, nome: "Luiz Henrique", pos: "ATA", forca: 88, salario: 70000, passe: 3600000, titular: true },
-      { id: 411, clubeId: 4, nome: "Igor Jesus", pos: "ATA", forca: 85, salario: 55000, passe: 2500000, titular: true },
-      { id: 412, clubeId: 4, nome: "Tiquinho Soares", pos: "ATA", forca: 80, salario: 45000, passe: 1200000, titular: false }
-    ];
-
-    // Tabela de confrontos (Turno e Returno - 6 rodadas)
-    const calendario = [
-      [[1, 2], [3, 4]],
-      [[2, 3], [4, 1]],
-      [[1, 3], [2, 4]],
-      [[2, 1], [4, 3]],
-      [[3, 2], [1, 4]],
-      [[3, 1], [4, 2]]
-    ];
-
-    let meuClubeId = null;
-    let rodadaAtual = 0;
-
-    // ==========================================
-    // 2. NAVEGAÇÃO E SELEÇÃO DE CLUBE
-    // ==========================================
-    function formatarMoeda(valor) {
-      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-    }
-
-    function trocarAba(aba) {
-      ['elenco', 'tabela', 'mercado'].forEach(nome => {
-        document.getElementById('tab-' + nome).classList.toggle('d-none', nome !== aba);
-        document.getElementById('btn-tab-' + nome).classList.toggle('active', nome === aba);
-      });
-    }
-
-    function abrirModal() {
-      document.getElementById('modalRodada').classList.remove('d-none');
-    }
-
-    function fecharModal() {
-      document.getElementById('modalRodada').classList.add('d-none');
-    }
-
-    function renderizarSelecao() {
-      const container = document.getElementById('lista-clubes-iniciais');
-      container.innerHTML = clubes.map(c => {
-        const elenco = jogadores.filter(j => j.clubeId === c.id);
-        const mediaForca = Math.round(elenco.reduce((acc, j) => acc + j.forca, 0) / elenco.length);
-        return `
-          <div class="card p-4 text-center">
-            <h3 class="fw-bold mb-2">${c.nome}</h3>
-            <p class="text-secondary small mb-3">${c.estadio} (${c.capacidade.toLocaleString('pt-BR')} lug.)</p>
-            <div class="mb-3">
-              <span class="badge bg-info text-dark mb-2">Força Média: ${mediaForca}</span><br>
-              <span class="text-success fw-bold">${formatarMoeda(c.caixa)}</span>
-            </div>
-            <button class="btn btn-outline-success mt-auto w-100 fw-bold" onclick="escolherClube(${c.id})">Assumir Comando</button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function escolherClube(id) {
-      meuClubeId = id;
-      document.getElementById('tela-selecao').classList.add('d-none');
-      document.getElementById('tela-jogo').classList.remove('d-none');
-      atualizarTela();
-    }
-
-    // ==========================================
-    // 3. ATUALIZAÇÃO DA INTERFACE (DASHBOARD)
-    // ==========================================
-    function atualizarTela() {
-      const clube = clubes.find(c => c.id === meuClubeId);
-      const meuElenco = jogadores.filter(j => j.clubeId === meuClubeId);
-      const titulares = meuElenco.filter(j => j.titular);
-
-      // Cabeçalho
-      document.getElementById('nome-meu-clube').innerText = clube.nome;
-      document.getElementById('info-estadio').innerText = `${clube.estadio} • Rodada ${rodadaAtual + 1} de ${calendario.length}`;
-      document.getElementById('caixa-clube').innerText = formatarMoeda(clube.caixa);
-
-      const forcaTotal = titulares.reduce((acc, j) => acc + j.forca, 0);
-      document.getElementById('forca-time').innerText = titulares.length > 0 ? Math.round(forcaTotal / 11) : 0;
-
-      // Contador e Folha
-      const contadorEl = document.getElementById('contador-titulares');
-      contadorEl.innerText = `${titulares.length}/11`;
-      contadorEl.className = titulares.length === 11 ? 'text-success fw-bold' : 'text-danger fw-bold';
-
-      const folha = meuElenco.reduce((acc, j) => acc + j.salario, 0);
-      document.getElementById('folha-salarial').innerText = formatarMoeda(folha);
-
-      // Tabela de Elenco
-      const ordemPos = { GOL: 1, ZAG: 2, MEI: 3, ATA: 4 };
-      meuElenco.sort((a, b) => ordemPos[a.pos] - ordemPos[b.pos] || b.forca - a.forca);
-
-      document.getElementById('tabela-meu-elenco').innerHTML = meuElenco.map(j => `
-        <tr class="${j.titular ? 'titular-row' : ''}">
-          <td>
-            <input type="checkbox" ${j.titular ? 'checked' : ''} onchange="alternarTitular(${j.id})">
-          </td>
-          <td><span class="badge badge-pos pos-${j.pos}">${j.pos}</span></td>
-          <td class="fw-semibold">${j.nome}</td>
-          <td><span class="badge bg-secondary">${j.forca}</span></td>
-          <td>${formatarMoeda(j.salario)}</td>
-          <td>${formatarMoeda(j.passe)}</td>
-          <td>
-            <button class="btn btn-sm btn-outline-warning" onclick="venderJogador(${j.id})">Vender</button>
-          </td>
-        </tr>
-      `).join('');
-
-      // Tabela de Classificação
-      const clubesOrdenados = [...clubes].sort((a, b) =>
-        b.pontos - a.pontos || b.v - a.v || (b.gp - b.gc) - (a.gp - a.gc) || b.gp - a.gp
-      );
-
-      document.getElementById('corpo-classificacao').innerHTML = clubesOrdenados.map((c, index) => `
-        <tr class="${c.id === meuClubeId ? 'table-active fw-bold' : ''}">
-          <td>${index + 1}º</td>
-          <td>${c.nome}</td>
-          <td class="text-success fw-bold">${c.pontos}</td>
-          <td>${c.jogos}</td>
-          <td>${c.v}</td>
-          <td>${c.e}</td>
-          <td>${c.d}</td>
-          <td>${c.gp - c.gc}</td>
-        </tr>
-      `).join('');
-
-      // Tabela de Mercado
-      const disponiveis = jogadores.filter(j => j.clubeId !== meuClubeId).sort((a, b) => b.forca - a.forca);
-      document.getElementById('tabela-mercado').innerHTML = disponiveis.map(j => {
-        const clubeAtual = clubes.find(c => c.id === j.clubeId).nome;
-        const podeComprar = clube.caixa >= j.passe;
-        return `
-          <tr>
-            <td><span class="badge badge-pos pos-${j.pos}">${j.pos}</span></td>
-            <td class="fw-semibold">${j.nome}</td>
-            <td class="text-secondary">${clubeAtual}</td>
-            <td><span class="badge bg-secondary">${j.forca}</span></td>
-            <td>${formatarMoeda(j.salario)}</td>
-            <td class="text-info fw-bold">${formatarMoeda(j.passe)}</td>
-            <td>
-              <button class="btn btn-sm ${podeComprar ? 'btn-success' : 'btn-secondary'}" onclick="comprarJogador(${j.id})">
-                Comprar
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    // ==========================================
-    // 4. REGRAS DE ESCALAÇÃO E MERCADO
-    // ==========================================
-    function alternarTitular(jogadorId) {
-      const jogador = jogadores.find(j => j.id === jogadorId);
-      jogador.titular = !jogador.titular;
-      atualizarTela();
-    }
-
-    function comprarJogador(jogadorId) {
-      const clube = clubes.find(c => c.id === meuClubeId);
-      const jogador = jogadores.find(j => j.id === jogadorId);
-
-      if (clube.caixa < jogador.passe) {
-        alert("Saldo insuficiente em caixa!");
-        return;
-      }
-
-      if (confirm(`Deseja contratar ${jogador.nome} por ${formatarMoeda(jogador.passe)}?`)) {
-        clube.caixa -= jogador.passe;
-        jogador.clubeId = meuClubeId;
-        jogador.titular = false;
-        atualizarTela();
-      }
-    }
-
-    function venderJogador(jogadorId) {
-      const meuElenco = jogadores.filter(j => j.clubeId === meuClubeId);
-      if (meuElenco.length <= 11) {
-        alert("Você precisa ter no mínimo 11 jogadores no elenco!");
-        return;
-      }
-
-      const clube = clubes.find(c => c.id === meuClubeId);
-      const jogador = jogadores.find(j => j.id === jogadorId);
-      const outrosClubes = clubes.filter(c => c.id !== meuClubeId);
-      const comprador = outrosClubes[Math.floor(Math.random() * outrosClubes.length)];
-
-      if (confirm(`Vender ${jogador.nome} para o ${comprador.nome} por ${formatarMoeda(jogador.passe)}?`)) {
-        clube.caixa += jogador.passe;
-        jogador.clubeId = comprador.id;
-        jogador.titular = false;
-        atualizarTela();
-      }
-    }
-
-    // ==========================================
-    // 5. MOTOR DE SIMULAÇÃO DA RODADA
-    // ==========================================
-    function simularRodada() {
-      const titulares = jogadores.filter(j => j.clubeId === meuClubeId && j.titular);
-      if (titulares.length !== 11) {
-        alert(`Atenção: Você escalou ${titulares.length} jogadores. É obrigatório escalar exatamente 11 titulares!`);
-        return;
-      }
-      const goleiros = titulares.filter(j => j.pos === "GOL");
-      if (goleiros.length !== 1) {
-        alert("Atenção: Você precisa escalar exatamente 1 Goleiro (GOL) entre os titulares!");
-        return;
-      }
-
-      if (rodadaAtual >= calendario.length) {
-        alert("Fim do Campeonato! Iniciando nova temporada...");
-        rodadaAtual = 0;
-        clubes.forEach(c => { c.pontos = 0; c.jogos = 0; c.v = 0; c.e = 0; c.d = 0; c.gp = 0; c.gc = 0; });
-      }
-
-      const jogosDaRodada = calendario[rodadaAtual];
-      let htmlResultados = "";
-      let bilheteriaMeuClube = 0;
-
-      jogosDaRodada.forEach(([idCasa, idFora]) => {
-        const casa = clubes.find(c => c.id === idCasa);
-        const fora = clubes.find(c => c.id === idFora);
-
-        const titCasa = idCasa === meuClubeId
-          ? titulares
-          : jogadores.filter(j => j.clubeId === idCasa).sort((a, b) => b.forca - a.forca).slice(0, 11);
-
-        const titFora = idFora === meuClubeId
-          ? titulares
-          : jogadores.filter(j => j.clubeId === idFora).sort((a, b) => b.forca - a.forca).slice(0, 11);
-
-        const forcaCasa = titCasa.reduce((acc, j) => acc + j.forca, 0) + 25 + (Math.floor(Math.random() * 81) - 40);
-        const forcaFora = titFora.reduce((acc, j) => acc + j.forca, 0) + (Math.floor(Math.random() * 81) - 40);
-
-        let golsCasa = Math.max(0, Math.round((forcaCasa - forcaFora) / 45) + Math.floor(Math.random() * 2));
-        let golsFora = Math.max(0, Math.round((forcaFora - forcaCasa) / 45) + Math.floor(Math.random() * 2));
-
-        const autoresCasa = sortearAutores(titCasa, golsCasa);
-        const autoresFora = sortearAutores(titFora, golsFora);
-
-        casa.jogos++; fora.jogos++;
-        casa.gp += golsCasa; casa.gc += golsFora;
-        fora.gp += golsFora; fora.gc += golsCasa;
-
-        if (golsCasa > golsFora) {
-          casa.pontos += 3; casa.v++; fora.d++;
-        } else if (golsFora > golsCasa) {
-          fora.pontos += 3; fora.v++; casa.d++;
-        } else {
-          casa.pontos += 1; fora.pontos += 1; casa.e++; fora.e++;
-        }
-
-        if (idCasa === meuClubeId) {
-          const publico = Math.floor(casa.capacidade * (0.6 + Math.random() * 0.35));
-          bilheteriaMeuClube = publico * 25;
-          casa.caixa += bilheteriaMeuClube;
-        }
-
-        htmlResultados += `
-          <div class="result-box">
-            <div class="d-flex justify-content-between align-items-center fs-5 fw-bold">
-              <span>${casa.nome}</span>
-              <span class="badge bg-success">${golsCasa} x ${golsFora}</span>
-              <span>${fora.nome}</span>
-            </div>
-            <div class="d-flex justify-content-between mt-2 small text-secondary">
-              <div>${autoresCasa.length ? '⚽ ' + autoresCasa.join(', ') : ''}</div>
-              <div class="text-end">${autoresFora.length ? '⚽ ' + autoresFora.join(', ') : ''}</div>
-            </div>
-          </div>
-        `;
-      });
-
-      const meuClube = clubes.find(c => c.id === meuClubeId);
-      const folha = jogadores.filter(j => j.clubeId === meuClubeId).reduce((acc, j) => acc + j.salario, 0);
-      meuClube.caixa -= folha;
-
-      htmlResultados += `
-        <div class="alert-box">
-          <strong>Resumo Financeiro da Rodada (${meuClube.nome}):</strong><br>
-          ${bilheteriaMeuClube > 0 ? `<span class="text-success">+ Bilheteria: ${formatarMoeda(bilheteriaMeuClube)}</span><br>` : ''}
-          <span class="text-danger">- Folha Salarial: ${formatarMoeda(folha)}</span>
-
-           <!-- ADICIONE ESTE BLOCO INTEIRO ANTES DE FECHAR A <div class="tab-content"> -->
+        <!-- ABA 4: EDITOR / CSV -->
         <div class="tab-pane fade" id="tab-editor">
           <div class="row g-4">
-            <!-- PAINEL DE IMPORTAÇÃO / EXPORTAÇÃO CSV -->
             <div class="col-lg-5">
               <div class="card p-3 h-100">
                 <h5 class="text-warning mb-3">📂 Repositório CSV (Backup & Carga)</h5>
@@ -612,7 +170,6 @@
               </div>
             </div>
 
-            <!-- PAINEL DE EDIÇÃO RÁPIDA NA TELA -->
             <div class="col-lg-7">
               <div class="card p-3">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -622,7 +179,7 @@
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                   <table class="table table-sm table-hover align-middle mb-0">
                     <thead>
-                    <tr>
+                      <tr>
                         <th>Nome</th>
                         <th>Pos</th>
                         <th>Força</th>
@@ -637,161 +194,29 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE RESULTADOS DA RODADA -->
+  <div class="modal fade" id="modalRodada" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title text-success fw-bold" id="tituloModalRodada">Resultados da Rodada</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
-      `;
+        <div class="modal-body" id="corpoModalRodada"></div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      document.getElementById('tituloModalRodada').innerText = `Resultados - Rodada ${rodadaAtual + 1}`;
-      document.getElementById('corpoModalRodada').innerHTML = htmlResultados;
-      document.getElementById('ultimos-resultados').innerHTML = htmlResultados;
-
-      rodadaAtual++;
-      atualizarTela();
-      abrirModal();
-    }
-
-    function sortearAutores(titulares, qtdGols) {
-      if (qtdGols === 0) return [];
-      const jogadoresLinha = titulares.filter(j => j.pos !== "GOL");
-      const autores = [];
-      for (let i = 0; i < qtdGols; i++) {
-        const sorteado = jogadoresLinha[Math.floor(Math.random() * jogadoresLinha.length)];
-        autores.push(`${sorteado.nome} (${Math.floor(Math.random() * 89) + 1}')`);
-      }
-      return autores;
-    }
-
-    renderizarSelecao();
-
-   <!-- Importador CSV de Times -->
-<ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
-  <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-elenco">📋 Elenco & Escalação</button></li>
-  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-tabela">🏆 Classificação & Jogos</button></li>
-  <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-mercado">💰 Mercado de Passes</button></li>
-  <!-- ADICIONE ESTA LINHA ABAIXO -->
-  <li class="nav-item"><button class="nav-link text-warning" data-bs-toggle="pill" data-bs-target="#tab-editor" onclick="renderizarEditor()">⚙️ Editor / CSV</button></li>
-</ul>
-
-    6. EDITOR DE TIMES E IMPORTAÇÃO/EXPORTAÇÃO CSV
+  <script src="https://jsdelivr.net"></script>
+  <script>
     // ==========================================
-    function renderizarEditor() {
-      const selectClube = document.getElementById('filtro-clube-editor');
-      if (selectClube.options.length === 0) {
-        selectClube.innerHTML = clubes.map(c => `<option value="${c.id}">${c.id} - ${c.nome}</option>`).join('');
-      }
-
-      const clubeSelecionadoId = parseInt(selectClube.value) || clubes[0].id;
-      const lista = jogadores.filter(j => j.clubeId === clubeSelecionadoId);
-
-      document.getElementById('tabela-editor-jogadores').innerHTML = lista.map(j => `
-        <tr>
-          <td><input type="text" id="edit-nome-${j.id}" class="form-control form-control-sm bg-dark text-white border-secondary" value="${j.nome}"></td>
-          <td>
-            <select id="edit-pos-${j.id}" class="form-select form-select-sm bg-dark text-white border-secondary">
-              <option value="GOL" ${j.pos === 'GOL' ? 'selected' : ''}>GOL</option>
-              <option value="ZAG" ${j.pos === 'ZAG' ? 'selected' : ''}>ZAG</option>
-              <option value="MEI" ${j.pos === 'MEI' ? 'selected' : ''}>MEI</option>
-              <option value="ATA" ${j.pos === 'ATA' ? 'selected' : ''}>ATA</option>
-            </select>
-          </td>
-          <td style="width: 75px;"><input type="number" id="edit-forca-${j.id}" min="1" max="99" class="form-control form-control-sm bg-dark text-white border-secondary" value="${j.forca}"></td>
-          <td style="width: 115px;"><input type="number" id="edit-passe-${j.id}" class="form-control form-control-sm bg-dark text-white border-secondary" value="${j.passe}"></td>
-          <td><button class="btn btn-sm btn-success" onclick="salvarEdicaoJogador(${j.id})">💾</button></td>
-        </tr>
-      `).join('');
-    }
-
-    function salvarEdicaoJogador(id) {
-      const jogador = jogadores.find(j => j.id === id);
-      jogador.nome = document.getElementById(`edit-nome-${id}`).value.trim();
-      jogador.pos = document.getElementById(`edit-pos-${id}`).value;
-      jogador.forca = parseInt(document.getElementById(`edit-forca-${id}`).value) || 50;
-      jogador.passe = parseInt(document.getElementById(`edit-passe-${id}`).value) || 100000;
-      
-      atualizarTela();
-      alert(`Jogador ${jogador.nome} atualizado com sucesso!`);
-    }
-
-    function exportarCSV() {
-      // Cabeçalho compatível com Excel em Português (separador ;)
-      let csv = "clube_id;nome;pos;forca;salario;passe\n";
-      jogadores.forEach(j => {
-        csv += `${j.clubeId};${j.nome};${j.pos};${j.forca};${j.salario};${j.passe}\n`;
-      });
-
-      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "base_jogadores_elifoot98.csv";
-      link.click();
-    }
-
-    function importarCSV() {
-      const input = document.getElementById('input-csv');
-      if (!input.files || !input.files[0]) {
-        alert("Selecione um arquivo .csv primeiro!");
-        return;
-      }
-
-      const leitor = new FileReader();
-      leitor.onload = function(e) {
-        const conteudo = e.target.result;
-        const linhas = conteudo.split(/\r?\n/).filter(l => l.trim() !== "");
-        
-        if (linhas.length < 2) {
-          alert("O arquivo CSV está vazio ou sem dados.");
-          return;
-        }
-
-        // Detecta automaticamente se o separador é ; ou ,
-        const separador = linhas[0].includes(';') ? ';' : ',';
-        const novosJogadores = [];
-        let proximoId = 1000;
-
-        // Pula a linha 0 (cabeçalho)
-        for (let i = 1; i < linhas.length; i++) {
-          const colunas = linhas[i].split(separador);
-          if (colunas.length >= 6) {
-            const clubeId = parseInt(colunas[0].trim());
-            const nome = colunas[1].trim();
-            const pos = colunas[2].trim().toUpperCase();
-            const forca = parseInt(colunas[3].trim());
-            const salario = parseInt(colunas[4].trim());
-            const passe = parseInt(colunas[5].trim());
-
-            if (!isNaN(clubeId) && nome && ["GOL", "ZAG", "MEI", "ATA"].includes(pos)) {
-              novosJogadores.push({
-                id: proximoId++,
-                clubeId: clubeId,
-                nome: nome,
-                pos: pos,
-                forca: forca || 70,
-                salario: salario || 20000,
-                passe: passe || 500000,
-                titular: false
-              });
-            }
-          }
-        }
-
-        if (novosJogadores.length > 0) {
-          // Substitui a base atual e define os 11 primeiros de cada time como titulares
-          jogadores = novosJogadores;
-          clubes.forEach(c => {
-            const elencoClube = jogadores.filter(j => j.clubeId === c.id);
-            elencoClube.slice(0, 11).forEach(j => j.titular = true);
-          });
-
-          atualizarTela();
-          renderizarEditor();
-          alert(`${novosJogadores.length} jogadores importados com sucesso!`);
-        } else {
-          alert("Nenhum jogador válido encontrado. Verifique o formato das colunas.");
-        }
-      };
-
-      leitor.readAsText(input.files[0], 'UTF-8');
-    }
-  </script>
-</body>
-</html>
+    // 1. BANCO DE DADOS INICIAL (REPOSITÓRIO)
+    // ==========================================
+    const clubes = [
