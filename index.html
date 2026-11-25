@@ -26,16 +26,12 @@
       --danger-text: #f87171;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #020617;
-      color: #f8fafc;
+      background-color: var(--bg-body);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -43,32 +39,21 @@
       line-height: 1.5;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    .fade-in {
-      animation: fadeIn 0.3s ease-in-out;
-    }
+    .hidden { display: none !important; }
+    .fade-in { animation: fadeIn 0.3s ease-in-out; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .spinner {
-      animation: spin 1s linear infinite;
-      width: 20px;
-      height: 20px;
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { animation: spin 1s linear infinite; width: 20px; height: 20px; }
 
     header {
-      border-bottom: 1px solid #1e293b;
-      background-color: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -89,7 +74,7 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: #f8fafc;
+      color: var(--text-main);
       font-weight: 700;
       font-size: 1.25rem;
     }
@@ -98,35 +83,24 @@
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      background-color: #4f46e5;
+      background-color: var(--primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
     }
 
-    .logo span {
-      color: #818cf8;
-    }
+    .logo span { color: var(--primary-light); }
 
-    nav {
-      display: flex;
-      gap: 24px;
-    }
-
+    nav { display: flex; gap: 24px; }
     nav button {
       background: none;
       border: none;
-      color: #94a3b8;
+      color: var(--text-muted);
       font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
-      transition: color 0.2s;
     }
-
-    nav button:hover {
-      color: #f8fafc;
-    }
+    nav button:hover { color: var(--text-main); }
 
     main {
       flex-grow: 1;
@@ -137,22 +111,17 @@
       padding: 48px 16px;
     }
 
-    .hero-container {
-      width: 100%;
-      max-width: 680px;
-      text-align: center;
-    }
+    .hero-container { width: 100%; max-width: 680px; text-align: center; }
 
     .badge {
       display: inline-block;
       padding: 4px 12px;
       border-radius: 999px;
-      background-color: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      color: #818cf8;
+      background-color: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: var(--primary-light);
       font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
       text-transform: uppercase;
       margin-bottom: 16px;
     }
@@ -160,37 +129,30 @@
     h1 {
       font-size: 2.25rem;
       font-weight: 700;
-      letter-spacing: -0.025em;
       margin-bottom: 16px;
       line-height: 1.2;
-      color: #ffffff;
     }
 
-    @media (min-width: 640px) {
-      h1 { font-size: 2.85rem; }
-    }
+    @media (min-width: 640px) { h1 { font-size: 2.85rem; } }
 
     .subtitle {
-      color: #94a3b8;
+      color: var(--text-muted);
       font-size: 1.05rem;
       max-width: 560px;
       margin: 0 auto 32px auto;
     }
 
     .search-box {
-      background-color: #0f172a;
+      background-color: var(--bg-card);
       padding: 8px;
       border-radius: 16px;
-      border: 1px solid #1e293b;
-      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    @media (min-width: 640px) {
-      .search-box { flex-direction: row; }
-    }
+    @media (min-width: 640px) { .search-box { flex-direction: row; } }
 
     .input-wrapper {
       position: relative;
@@ -203,14 +165,10 @@
       width: 100%;
       background: transparent;
       border: none;
-      color: #f8fafc;
+      color: var(--text-main);
       padding: 14px 85px 14px 16px;
       font-size: 0.95rem;
       outline: none;
-    }
-
-    .input-wrapper input::placeholder {
-      color: #64748b;
     }
 
     .btn-paste {
@@ -219,24 +177,16 @@
       padding: 6px 10px;
       font-size: 0.75rem;
       font-weight: 500;
-      background-color: #1e293b;
+      background-color: var(--bg-btn-sec);
       color: #cbd5e1;
-      border: 1px solid #334155;
+      border: 1px solid var(--border-light);
       border-radius: 8px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: background 0.2s;
-    }
-
-    .btn-paste:hover {
-      background-color: #334155;
     }
 
     .btn-analyze {
-      background-color: #4f46e5;
-      color: #ffffff;
+      background-color: var(--primary);
+      color: white;
       font-weight: 600;
       font-size: 0.95rem;
       padding: 14px 28px;
@@ -247,139 +197,99 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
-      transition: background 0.2s;
     }
 
-    .btn-analyze:hover {
-      background-color: #6366f1;
-    }
+    .btn-analyze:hover { background-color: var(--primary-hover); }
 
     .error-box {
       margin-top: 16px;
       padding: 14px;
       border-radius: 12px;
-      background-color: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.35);
-      color: #f87171;
+      background-color: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      color: var(--danger-text);
       font-size: 0.875rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      word-break: break-word;
     }
 
     .result-card {
       margin-top: 32px;
-      background-color: #0f172a;
-      border: 1px solid #1e293b;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 16px;
       padding: 24px;
       text-align: left;
-      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6);
     }
 
-    .result-top {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    @media (min-width: 640px) {
-      .result-top { flex-direction: row; }
-    }
+    .result-top { display: flex; flex-direction: column; gap: 20px; }
+    @media (min-width: 640px) { .result-top { flex-direction: row; } }
 
     .thumb-box {
       position: relative;
       width: 100%;
       border-radius: 12px;
       overflow: hidden;
-      background-color: #1e293b;
+      background-color: var(--bg-btn-sec);
       aspect-ratio: 16 / 9;
       flex-shrink: 0;
     }
 
-    @media (min-width: 640px) {
-      .thumb-box { width: 210px; }
-    }
-
-    .thumb-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    @media (min-width: 640px) { .thumb-box { width: 210px; } }
+    .thumb-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .duration-badge {
       position: absolute;
       bottom: 8px;
       right: 8px;
       background-color: rgba(0, 0, 0, 0.85);
-      color: #ffffff;
+      color: white;
       font-size: 0.75rem;
       font-weight: 600;
       padding: 2px 6px;
       border-radius: 4px;
     }
 
-    .video-info {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+    .video-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
     .source-tag {
       font-size: 0.75rem;
       font-weight: 600;
-      color: #818cf8;
+      color: var(--primary-light);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .source-tag span.status {
-      color: #94a3b8;
-      font-weight: 400;
-    }
-
     .video-title {
       font-size: 1.05rem;
       font-weight: 600;
-      color: #f8fafc;
+      color: var(--text-main);
       margin-bottom: 16px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
-    .controls-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (min-width: 640px) {
-      .controls-grid { grid-template-columns: 1fr 1fr; }
-    }
+    .controls-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 640px) { .controls-grid { grid-template-columns: 1fr 1fr; } }
 
     .control-label {
       display: block;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #94a3b8;
+      color: var(--text-muted);
       margin-bottom: 6px;
     }
 
     .format-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      background-color: #020617;
+      background-color: var(--bg-input);
       padding: 4px;
       border-radius: 8px;
-      border: 1px solid #1e293b;
+      border: 1px solid var(--border-color);
     }
 
     .tab-btn {
@@ -389,48 +299,32 @@
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
-    .tab-active {
-      background-color: #4f46e5;
-      color: #ffffff;
-    }
-
-    .tab-inactive {
-      background-color: transparent;
-      color: #94a3b8;
-    }
-
-    .tab-inactive:hover {
-      color: #ffffff;
-    }
+    .tab-active { background-color: var(--primary); color: white; }
+    .tab-inactive { background-color: transparent; color: var(--text-muted); }
 
     select {
       width: 100%;
-      background-color: #020617;
-      border: 1px solid #1e293b;
-      color: #f8fafc;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
       font-size: 0.825rem;
       border-radius: 8px;
       padding: 8px 10px;
       outline: none;
     }
 
-    select:focus {
-      border-color: #6366f1;
-    }
-
     .action-area {
       margin-top: 24px;
       padding-top: 20px;
-      border-top: 1px solid #1e293b;
+      border-top: 1px solid var(--border-color);
     }
 
     .btn-convert {
       width: 100%;
-      background-color: #059669;
-      color: #ffffff;
+      background-color: var(--success);
+      color: white;
       font-weight: 600;
       font-size: 0.95rem;
       padding: 14px 24px;
@@ -441,13 +335,9 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px rgba(5, 150, 105, 0.25);
-      transition: background 0.2s;
     }
 
-    .btn-convert:hover {
-      background-color: #10b981;
-    }
+    .btn-convert:hover { background-color: var(--success-hover); }
 
     .progress-header {
       display: flex;
@@ -457,41 +347,29 @@
       margin-bottom: 6px;
     }
 
-    .progress-status {
-      color: #818cf8;
-    }
-
     .progress-track {
       width: 100%;
-      background-color: #020617;
+      background-color: var(--bg-input);
       border-radius: 999px;
       height: 12px;
-      border: 1px solid #1e293b;
+      border: 1px solid var(--border-color);
       overflow: hidden;
     }
 
     .progress-fill {
-      background-color: #6366f1;
+      background-color: var(--primary-hover);
       height: 100%;
-      border-radius: 999px;
       width: 0%;
       transition: width 0.3s ease;
     }
 
-    .ready-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    @media (min-width: 640px) {
-      .ready-actions { flex-direction: row; }
-    }
+    .ready-actions { display: flex; flex-direction: column; gap: 12px; }
+    @media (min-width: 640px) { .ready-actions { flex-direction: row; } }
 
     .btn-download-again {
       flex-grow: 1;
-      background-color: #4f46e5;
-      color: #ffffff;
+      background-color: var(--primary);
+      color: white;
       font-weight: 600;
       padding: 14px 24px;
       border: none;
@@ -503,36 +381,22 @@
       gap: 8px;
     }
 
-    .btn-download-again:hover {
-      background-color: #6366f1;
-    }
-
     .btn-reset {
       padding: 14px 20px;
       border-radius: 12px;
-      background-color: #1e293b;
+      background-color: var(--bg-btn-sec);
       color: #cbd5e1;
       border: none;
       font-size: 0.875rem;
-      font-weight: 500;
       cursor: pointer;
     }
 
-    .btn-reset:hover {
-      background-color: #334155;
-    }
-
     footer {
-      border-top: 1px solid #1e293b;
+      border-top: 1px solid var(--border-color);
       padding: 20px 16px;
       text-align: center;
-      color: #64748b;
+      color: var(--text-dim);
       font-size: 0.78rem;
-    }
-
-    footer p {
-      max-width: 680px;
-      margin: 0 auto;
     }
 
     .modal-overlay {
@@ -547,420 +411,279 @@
     }
 
     .modal-box {
-      background-color: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 16px;
-      max-width: 440px;
-      width: 100%;
-      padding: 24px;
-    }
 
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
+		background-color: var(--bg-card);
+border: 1px solid var(--border-color);
+border-radius: 16px;
+max-width: 440px;
+width: 100%;
+padding: 24px;
+}
+.modal-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 16px;
+}
+.modal-close {
+background: none;
+border: none;
+color: var(--text-muted);
+font-size: 1.5rem;
+cursor: pointer;
+}
+.btn-modal-ok {
+margin-top: 24px;
+width: 100%;
+background-color: var(--bg-btn-sec);
+color: white;
+border: none;
+padding: 10px;
+border-radius: 10px;
+cursor: pointer;
+}
+svg { width: 20px; height: 20px; flex-shrink: 0; }
 
-    .modal-header h3 {
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: #f8fafc;
-    }
 
-    .modal-close {
-      background: none;
-      border: none;
-      color: #94a3b8;
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-    }
+StreamFetch
 
-    .modal-box ol {
-      padding-left: 20px;
-      color: #cbd5e1;
-      font-size: 0.875rem;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
 
-    .modal-box p {
-      color: #cbd5e1;
-      font-size: 0.875rem;
-      line-height: 1.6;
-    }
+Como Usar
+Termos de Uso
 
-    .btn-modal-ok {
-      margin-top: 24px;
-      width: 100%;
-      background-color: #1e293b;
-      color: #ffffff;
-      border: none;
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
 
-    .btn-modal-ok:hover {
-      background-color: #334155;
-    }
+Rápido • Gratuito • Sem Marca D'água
+Baixe e converta vídeos em segundos
+Cole o link do YouTube, Instagram, TikTok ou Vimeo abaixo para extrair em MP4 de alta definição ou áudio MP3.
+Colar
 
-    svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-  </style>
-</head>
-<body>
 
-  <header>
-    <div class="header-container">
-      <a href="#" onclick="resetApp()" class="logo">
-        <div class="logo-icon">
-          <svg fill="none" stroke="white" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-          </svg>
-        </div>
-        <div>Stream<span>Fetch</span></div>
-      </a>
+Analisar
 
-      <nav>
-        <button onclick="toggleModal('modal-como-usar')">Como Usar</button>
-        <button onclick="toggleModal('modal-termos')">Termos de Uso</button>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <div class="hero-container">
-      <span class="badge">Rápido • Gratuito • Sem Marca D'água</span>
-      <h1>Baixe e converta vídeos em segundos</h1>
-      <p class="subtitle">
-        Cole o link do YouTube, Instagram, TikTok ou Vimeo abaixo para extrair em MP4 de alta definição ou áudio MP3.
-      </p>
 
-      <div class="search-box">
-        <div class="input-wrapper">
-          <input 
-            type="url" 
-            id="url-input" 
-            placeholder="https://www.youtube.com/watch?v=..." 
-            onkeydown="if(event.key === 'Enter') analyzeUrl()"
-          >
-          <button type="button" onclick="pasteFromClipboard()" class="btn-paste" title="Colar da área de transferência">
-            <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-            </svg>
-            Colar
-          </button>
-        </div>
 
-        <button id="btn-analyze" onclick="analyzeUrl()" class="btn-analyze">
-          <span id="btn-analyze-text">Analisar</span>
-          <svg id="btn-analyze-spinner" class="hidden spinner" fill="none" viewBox="0 0 24 24">
-            <circle style="opacity:0.25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path style="opacity:0.75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-        </button>
-      </div>
 
-      <div id="error-box" class="hidden error-box fade-in">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        <span id="error-message">Link inválido ou vídeo indisponível.</span>
-      </div>
+Link inválido ou vídeo indisponível.
+00:00
 
-      <div id="result-card" class="hidden result-card fade-in">
-        <div class="result-top">
-          <div class="thumb-box">
-            <img id="video-thumb" src="" alt="Thumbnail do vídeo">
-            <span id="video-duration" class="duration-badge">00:00</span>
-          </div>
 
-          <div class="video-info">
-            <div>
-              <div class="source-tag">
-                <span id="video-source" style="text-transform:uppercase;">YouTube</span>
-                <span>•</span>
-                <span class="status">Pronto para conversão</span>
-              </div>
-              <h2 id="video-title" class="video-title">Título do Vídeo Carregado</h2>
-            </div>
 
-            <div class="controls-grid">
-              <div>
-                <span class="control-label">Formato</span>
-                <div class="format-tabs">
-                  <button type="button" id="tab-mp4" onclick="selectFormat('mp4')" class="tab-btn tab-active">MP4 (Vídeo)</button>
-                  <button type="button" id="tab-mp3" onclick="selectFormat('mp3')" class="tab-btn tab-inactive">MP3 (Áudio)</button>
-                </div>
-              </div>
 
-              <div>
-                <label for="quality-select" class="control-label">Qualidade</label>
-                <select id="quality-select"></select>
-              </div>
-            </div>
-          </div>
-        </div>
+WEB
+•
+Pronto para conversão
 
-        <div class="action-area">
-          <button id="btn-convert" onclick="startConversion()" class="btn-convert">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-            </svg>
-            <span>Converter e Baixar</span>
-          </button>
+Título do Vídeo
 
-          <div id="progress-container" class="hidden">
-            <div class="progress-header">
-              <span id="progress-status" class="progress-status">Extraindo stream de mídia...</span>
-              <span id="progress-percent">0%</span>
-            </div>
-            <div class="progress-track">
-              <div id="progress-bar" class="progress-fill"></div>
-            </div>
-          </div>
 
-          <div id="download-ready" class="hidden ready-actions">
-            <button onclick="triggerMockDownload()" class="btn-download-again">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <span>Baixar Arquivo Novamente</span>
-            </button>
-            <button onclick="resetApp()" class="btn-reset">Converter Outro</button>
-          </div>
-        </div>
-      </div>
 
-    </div>
-  </main>
+Formato
 
-  <footer>
-    <p>
-      Aviso Legal: O <strong>StreamFetch</strong> é uma ferramenta destinada apenas para uso pessoal e backup de conteúdos livres de direitos autorais ou com permissão explícita do criador.
-    </p>
-  </footer>
+MP4 (Vídeo)
+MP3 (Áudio)
 
-  <div id="modal-como-usar" class="hidden modal-overlay">
-    <div class="modal-box fade-in">
-      <div class="modal-header">
-        <h3>Como usar o StreamFetch</h3>
-        <button onclick="toggleModal('modal-como-usar')" class="modal-close">&times;</button>
-      </div>
-      <ol>
-        <li>Copie o link do vídeo desejado na barra de endereços ou botão compartilhar.</li>
-        <li>Cole o link no campo principal e clique em <strong>Analisar</strong>.</li>
-        <li>Escolha entre <strong>MP4 (Vídeo)</strong> ou <strong>MP3 (Áudio)</strong> e selecione a qualidade.</li>
-        <li>Clique em <strong>Converter e Baixar</strong> e aguarde o processamento finalizar.</li>
-      </ol>
-      <button onclick="toggleModal('modal-como-usar')" class="btn-modal-ok">Entendi</button>
-    </div>
-  </div>
 
-  <div id="modal-termos" class="hidden modal-overlay">
-    <div class="modal-box fade-in">
-      <div class="modal-header">
-        <h3>Termos de Uso</h3>
-        <button onclick="toggleModal('modal-termos')" class="modal-close">&times;</button>
-      </div>
-      <p>
-        Este serviço não armazena cópias permanentes de vídeos em seus servidores. Todos os arquivos convertidos são excluídos automaticamente 15 minutos após a geração. O usuário é integralmente responsável pelo respeito às leis de direitos autorais vigentes.
-      </p>
-      <button onclick="toggleModal('modal-termos')" class="btn-modal-ok">Fechar</button>
-    </div>
-  </div>
+Qualidade
+Converter e Baixar
+Extraindo stream de mídia...
+...
 
-  <script>
-    let currentFormat = 'mp4';
-    let currentVideoData = null;
 
-    const qualityOptions = {
-      mp4: [
-        { label: '1080p Full HD (.mp4) — ~48 MB', value: '1080p' },
-        { label: '720p HD (.mp4) — ~24 MB', value: '720p' },
-        { label: '480p SD (.mp4) — ~12 MB', value: '480p' }
-      ],
-      mp3: [
-        { label: '320 kbps Alta Qualidade (.mp3) — ~8.5 MB', value: '320k' },
-        { label: '128 kbps Padrão (.mp3) — ~3.4 MB', value: '128k' }
-      ]
-    };
 
-    async function pasteFromClipboard() {
-      try {
-        const text = await navigator.clipboard.readText();
-        document.getElementById('url-input').value = text;
-      } catch (err) {
-        alert('Permissão para acessar a área de transferência negada. Cole manualmente com Ctrl+V.');
-      }
-    }
 
-    function detectSource(url) {
-      if (/youtube\.com|youtu\.be/i.test(url)) return 'YouTube';
-      if (/instagram\.com/i.test(url)) return 'Instagram';
-      if (/tiktok\.com/i.test(url)) return 'TikTok';
-      if (/vimeo\.com/i.test(url)) return 'Vimeo';
-      return null;
-    }
+Baixar Arquivo Novamente
 
-  
-    // =========================================================================
-    // SUBSTITUA DAQUI PARA BAIXO DENTRO DA TAG <script> DO SEU streamfetch.html
-    // =========================================================================
+Converter Outro
 
-    const API_URL = window.location.origin;
-    let lastDownloadedBlobUrl = null;
-    let lastDownloadedFilename = "";
 
-    // 1. SUBSTITUI A FUNÇÃO analyzeUrl() ORIGINAL (Busca metadados reais)
-    async function analyzeUrl() {
-      const input = document.getElementById('url-input').value.trim();
-      const errorBox = document.getElementById('error-box');
-      const resultCard = document.getElementById('result-card');
-      const btnText = document.getElementById('btn-analyze-text');
-      const btnSpinner = document.getElementById('btn-analyze-spinner');
 
-      errorBox.classList.add('hidden');
-      resultCard.classList.add('hidden');
 
-      let validUrl = false;
-      try { new URL(input); validUrl = true; } catch (_) {}
-      const source = detectSource(input);
+Aviso Legal: Utilize o StreamFetch apenas para conteúdos livres de direitos autorais ou com permissão de uso.
+Como usar
+×
+Cole o link do vídeo, clique em Analisar, escolha MP4 ou MP3 e clique em Converter e Baixar.
+Entendi
 
-      if (!validUrl || !source) {
-        document.getElementById('error-message').textContent = 
-          'URL inválida ou plataforma não suportada. Use links do YouTube, Instagram, TikTok ou Vimeo.';
-        errorBox.classList.remove('hidden');
-        return;
-      }
+Termos de Uso
+×
+O usuário é responsável pelo respeito às leis de direitos autorais vigentes.
+Fechar
 
-      btnText.textContent = 'Analisando...';
-      btnSpinner.classList.remove('hidden');
+const API_URL = window.location.origin;
+let currentFormat = 'mp4';
+let currentVideoData = null;
+let lastDownloadedBlobUrl = null;
+let lastDownloadedFilename = '';
+const qualityOptions = {
+mp4: [
+{ label: '1080p Full HD (.mp4)', value: '1080p' },
+{ label: '720p HD (.mp4)', value: '720p' },
+{ label: '480p SD (.mp4)', value: '480p' }
+],
+mp3: [
+{ label: '320 kbps Alta Qualidade (.mp3)', value: '320k' },
+{ label: '128 kbps Padrão (.mp3)', value: '128k' }
+]
+};
+async function pasteFromClipboard() {
+try {
+const text = await navigator.clipboard.readText();
+document.getElementById('url-input').value = text;
+} catch (err) {
+alert('Cole manualmente com Ctrl+V ou toque e segure no campo.');
+}
+}
+function detectSource(url) {
+if (/youtube.com|youtu.be/i.test(url)) return 'YouTube';
+if (/instagram.com) return 'Instagram';
+if (/tiktok.com) return 'TikTok';
+if (/vimeo.com) return 'Vimeo';
+return null;
+}
+async function analyzeUrl() {
+const input = document.getElementById('url-input').value.trim();
+const errorBox = document.getElementById('error-box');
+const resultCard = document.getElementById('result-card');
+const btnText = document.getElementById('btn-analyze-text');
+const btnSpinner = document.getElementById('btn-analyze-spinner');
+errorBox.classList.add('hidden');
+resultCard.classList.add('hidden');
+let validUrl = false;
+try { new URL(input); validUrl = true; } catch (_) {}
+const source = detectSource(input);
+if (!validUrl || !source) {
+document.getElementById('error-message').textContent =
+'URL inválida ou plataforma não suportada. Use links do YouTube, Instagram, TikTok ou Vimeo.';
+errorBox.classList.remove('hidden');
+return;
+}
+btnText.textContent = 'Analisando...';
+btnSpinner.classList.remove('hidden');
+try {
+const response = await fetch(${API_URL}/analyze, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ url: input })
+});
+if (!response.ok) {
+const errData = await response.json().catch(() => ({}));
+throw new Error(errData.detail || Erro HTTP ${response.status});
+}
+const data = await response.json();
+currentVideoData = {
+url: input,
+title: data.title,
+duration: data.duration,
+source: data.source || source,
+thumbnail: data.thumbnail
+};
+const fallbackThumb = "data:image/svg+xml;utf8,";
+const thumbImg = document.getElementById('video-thumb');
+thumbImg.onerror = function() { this.src = fallbackThumb; };
+thumbImg.src = currentVideoData.thumbnail || fallbackThumb;
+document.getElementById('video-title').textContent = currentVideoData.title;
+document.getElementById('video-duration').textContent = currentVideoData.duration;
+document.getElementById('video-source').textContent = currentVideoData.source;
+selectFormat('mp4');
+document.getElementById('btn-convert').classList.remove('hidden');
+document.getElementById('progress-container').classList.add('hidden');
+document.getElementById('download-ready').classList.add('hidden');
+resultCard.classList.remove('hidden');
+} catch (err) {
+document.getElementById('error-message').textContent = err.message;
+errorBox.classList.remove('hidden');
+} finally {
+btnText.textContent = 'Analisar';
+btnSpinner.classList.add('hidden');
+}
+}
+function selectFormat(format) {
+currentFormat = format;
+const tabMp4 = document.getElementById('tab-mp4');
+const tabMp3 = document.getElementById('tab-mp3');
+const select = document.getElementById('quality-select');
+if (format === 'mp4') {
+tabMp4.className = 'tab-btn tab-active';
+tabMp3.className = 'tab-btn tab-inactive';
+} else {
+tabMp3.className = 'tab-btn tab-active';
+tabMp4.className = 'tab-btn tab-inactive';
+}
+select.innerHTML = '';
+qualityOptions[format].forEach(opt => {
+const option = document.createElement('option');
+option.value = opt.value;
+option.textContent = opt.label;
+select.appendChild(option);
+});
+}
+async function startConversion() {
+const btnConvert = document.getElementById('btn-convert');
+const progressContainer = document.getElementById('progress-container');
+const progressBar = document.getElementById('progress-bar');
+const progressPercent = document.getElementById('progress-percent');
+const progressStatus = document.getElementById('progress-status');
+const downloadReady = document.getElementById('download-ready');
+const quality = document.getElementById('quality-select').value;
+btnConvert.classList.add('hidden');
+progressContainer.classList.remove('hidden');
+progressBar.style.width = '40%';
+progressPercent.textContent = 'Processando...';
+progressStatus.textContent = Baixando e convertendo para ${currentFormat.toUpperCase()}...;
+try {
+const response = await fetch(${API_URL}/download, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+url: currentVideoData.url,
+format: currentFormat,
+quality: quality
+})
+});
+if (!response.ok) {
+const errData = await response.json().catch(() => ({}));
+throw new Error(errData.detail || 'Erro na conversão do vídeo.');
+}
+progressBar.style.width = '90%';
+progressStatus.textContent = 'Recebendo arquivo...';
+const blob = await response.blob();
+lastDownloadedBlobUrl = URL.createObjectURL(blob);
+const disposition = response.headers.get('Content-Disposition');
+lastDownloadedFilename = StreamFetch_${quality}.${currentFormat};
+if (disposition && disposition.includes('filename=')) {
+lastDownloadedFilename = disposition.split('filename=')[1].replace(/"/g, '');
+}
+progressBar.style.width = '100%';
+progressPercent.textContent = '100%';
+setTimeout(() => {
+progressContainer.classList.add('hidden');
+downloadReady.classList.remove('hidden');
+triggerRealDownload();
+}, 300);
+} catch (err) {
+progressContainer.classList.add('hidden');
+btnConvert.classList.remove('hidden');
+document.getElementById('error-message').textContent = err.message;
+document.getElementById('error-box').classList.remove('hidden');
+}
+}
+function triggerRealDownload() {
+if (!lastDownloadedBlobUrl) return;
+const link = document.createElement('a');
+link.href = lastDownloadedBlobUrl;
+link.download = lastDownloadedFilename;
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
+}
+function resetApp() {
+document.getElementById('url-input').value = '';
+document.getElementById('result-card').classList.add('hidden');
+document.getElementById('error-box').classList.add('hidden');
+document.getElementById('progress-bar').style.width = '0%';
+}
+function toggleModal(id) {
+document.getElementById(id).classList.toggle('hidden');
+}
 
-      try {
-        const  = await fetch(`${API_URL}/analyze`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ url: input })
-        });
-
-        if (!response.ok) {
-          const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.detail || `Erro HTTP ${response.status}`);
-        }
-        const data = await response.json();
-
-        currentVideoData = {
-          url: input,
-          title: data.title,
-          duration: data.duration,
-          source: data.source || source,
-          thumbnail: data.thumbnail
-        };
-
-        const fallbackThumb = "data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='600' height='340' viewBox='0 0 600 340'><rect width='600' height='340' fill='%231e293b'/><polygon points='280,140 280,200 330,170' fill='%23818cf8'/></svg>";
-        const thumbImg = document.getElementById('video-thumb');
-        thumbImg.onerror = function() { this.src = fallbackThumb; };
-        thumbImg.src = currentVideoData.thumbnail || fallbackThumb;
-
-        document.getElementById('video-title').textContent = currentVideoData.title;
-        document.getElementById('video-duration').textContent = currentVideoData.duration;
-        document.getElementById('video-source').textContent = currentVideoData.source;
-
-        selectFormat('mp4');
-        document.getElementById('btn-convert').classList.remove('hidden');
-        document.getElementById('progress-container').classList.add('hidden');
-        document.getElementById('download-ready').classList.add('hidden');
-        resultCard.classList.remove('hidden');
-
-      } catch (err) {
-        document.getElementById('error-message').textContent = err.message;
-        errorBox.classList.remove('hidden');
-      } finally {
-        btnText.textContent = 'Analisar';
-        btnSpinner.classList.add('hidden');
-
-    // 2. SUBSTITUI A FUNÇÃO startConversion() ORIGINAL (Faz o download real)
-    async function startConversion() {
-      const btnConvert = document.getElementById('btn-convert');
-      const progressContainer = document.getElementById('progress-container');
-      const progressBar = document.getElementById('progress-bar');
-      const progressPercent = document.getElementById('progress-percent');
-      const progressStatus = document.getElementById('progress-status');
-      const downloadReady = document.getElementById('download-ready');
-      const quality = document.getElementById('quality-select').value;
-
-      btnConvert.classList.add('hidden');
-      progressContainer.classList.remove('hidden');
-      progressBar.style.width = '35%';
-      progressPercent.textContent = 'Processando...';
-      progressStatus.textContent = `Baixando e convertendo para ${currentFormat.toUpperCase()} no servidor...`;
-
-      try {
-        const response = await fetch(`${API_URL}/download`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            url: currentVideoData.url,
-            format: currentFormat,
-            quality: quality
-          })
-        });
-
-        if (!response.ok) throw new Error('Erro na conversão do vídeo.');
-
-        progressBar.style.width = '90%';
-        progressStatus.textContent = 'Recebendo arquivo...';
-
-        // Recebe o arquivo binário real (MP4 ou MP3)
-        const blob = await response.blob();
-        lastDownloadedBlobUrl = URL.createObjectURL(blob);
-        
-        // Extrai o nome do arquivo enviado pelo servidor
-        const disposition = response.headers.get('Content-Disposition');
-        lastDownloadedFilename = `StreamFetch_${quality}.${currentFormat}`;
-        if (disposition && disposition.includes('filename=')) {
-          lastDownloadedFilename = disposition.split('filename=')[1].replace(/"/g, '');
-        }
-
-        progressBar.style.width = '100%';
-        progressPercent.textContent = '100%';
-
-        setTimeout(() => {
-          progressContainer.classList.add('hidden');
-          downloadReady.classList.remove('hidden');
-          triggerMockDownload(); // Dispara o download do arquivo real
-        }, 300);
-
-      } catch (err) {
-        progressContainer.classList.add('hidden');
-        btnConvert.classList.remove('hidden');
-        alert('Falha ao baixar o vídeo. Verifique se o servidor Python está rodando.');
-      }
-    }
-
-    // 3. SUBSTITUI A FUNÇÃO triggerMockDownload() ORIGINAL (Salva o arquivo real no PC)
-    function triggerMockDownload()
-	{
-      if (!lastDownloadedBlobUrl) return;
-      const link = document.createElement('a');
-      link.href = lastDownloadedBlobUrl;
-      link.download = lastDownloadedFilename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  </script>
-	  <script src="https://jsdelivr.net"></script>
-  <script>eruda.init();</script>
-</body>
-</body>
-</html>
