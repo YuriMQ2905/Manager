@@ -1,58 +1,8 @@
-import os
-import uuid
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
-from pydantic import BaseModel
-import yt_dlp
-
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-DOWNLOAD_DIR = "downloads"
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
-
-# Detecta se o arquivo de cookies foi configurado no Render (Secret Files)
-COOKIE_FILE = "/etc/secrets/cookies.txt" if os.path.exists("/etc/secrets/cookies.txt") else ("cookies.txt" if os.path.exists("cookies.txt") else None)
-
-class VideoRequest(BaseModel):
-    url: str
-    format: str = "mp4"
-    quality: str = "1080p"
-
-@app.get("/")
-def serve_frontend():
-    return FileResponse("index.html")
-
-@app.post("/analyze")
-def analyze_video(req: VideoRequest):
-    ydl_opts = {
-        "quiet": True,
-        "no_warnings": True,
-        "cookiefile": COOKIE_FILE,
-    }
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(req.url, download=False)
-            duration_sec = info.get("duration", 0)
-            mins, secs = divmod(duration_sec, 60)
-            return {
-                "title": info.get("title", "Vídeo sem título"),
-                "duration": f"{int(mins):02d}:{int(secs):02d}",
-                "thumbnail": info.get("thumbnail", ""),
-                "source": info.get("extractor_key", "Web")
-            }
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
 @app.post("/download")
 def download_video(req: VideoRequest):
+    COOKIE_FILE = "cookies.txt" if os.path.exists("cookies.txt") else (
+        "/etc/secrets/cookies.txt" if os.path.exists("/etc/secrets/cookies.txt") else None
+    )
     file_id = str(uuid.uuid4())
     output_template = os.path.join(DOWNLOAD_DIR, f"{file_id}.%(ext)s")
 
@@ -81,7 +31,7 @@ def download_video(req: VideoRequest):
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(req.url, download=True)
-            safe_title = "".join(c for c in info.get("title", "video") if c.isalnum() or c in " -_").strip()
+            safe_title = "".join(c for c in info.get("title", "video") if c.isalnum() or c in " -_").strip() or "video"
             final_file = os.path.join(DOWNLOAD_DIR, f"{file_id}.{final_ext}")
 
         return FileResponse(
