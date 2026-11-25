@@ -18,19 +18,25 @@ app.add_middleware(
 DOWNLOAD_DIR = "downloads"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
+# Detecta se o arquivo de cookies foi configurado no Render (Secret Files)
+COOKIE_FILE = "/etc/secrets/cookies.txt" if os.path.exists("/etc/secrets/cookies.txt") else ("cookies.txt" if os.path.exists("cookies.txt") else None)
+
 class VideoRequest(BaseModel):
     url: str
     format: str = "mp4"
     quality: str = "1080p"
 
-# Serve a página inicial (index.html) ao acessar o link no celular
 @app.get("/")
 def serve_frontend():
     return FileResponse("index.html")
 
 @app.post("/analyze")
 def analyze_video(req: VideoRequest):
-    ydl_opts = {"quiet": True, "no_warnings": True}
+    ydl_opts = {
+        "quiet": True,
+        "no_warnings": True,
+        "cookiefile": COOKIE_FILE,
+    }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(req.url, download=False)
@@ -54,6 +60,7 @@ def download_video(req: VideoRequest):
         ydl_opts = {
             "format": "bestaudio/best",
             "outtmpl": output_template,
+            "cookiefile": COOKIE_FILE,
             "postprocessors": [{
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
@@ -67,6 +74,7 @@ def download_video(req: VideoRequest):
             "format": f"bestvideo[height<={height}][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
             "outtmpl": output_template,
             "merge_output_format": "mp4",
+            "cookiefile": COOKIE_FILE,
         }
         final_ext = "mp4"
 
