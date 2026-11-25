@@ -852,7 +852,10 @@
           body: JSON.stringify({ url: input })
         });
 
-        if (!response.ok) throw new Error('Falha ao obter dados do vídeo.');
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.detail || `Erro HTTP ${response.status}`);
+        }
         const data = await response.json();
 
         currentVideoData = {
@@ -863,10 +866,14 @@
           thumbnail: data.thumbnail
         };
 
+        const fallbackThumb = "data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='600' height='340' viewBox='0 0 600 340'><rect width='600' height='340' fill='%231e293b'/><polygon points='280,140 280,200 330,170' fill='%23818cf8'/></svg>";
+        const thumbImg = document.getElementById('video-thumb');
+        thumbImg.onerror = function() { this.src = fallbackThumb; };
+        thumbImg.src = currentVideoData.thumbnail || fallbackThumb;
+
         document.getElementById('video-title').textContent = currentVideoData.title;
         document.getElementById('video-duration').textContent = currentVideoData.duration;
         document.getElementById('video-source').textContent = currentVideoData.source;
-        document.getElementById('video-thumb').src = currentVideoData.thumbnail;
 
         selectFormat('mp4');
         document.getElementById('btn-convert').classList.remove('hidden');
@@ -875,14 +882,11 @@
         resultCard.classList.remove('hidden');
 
       } catch (err) {
-        document.getElementById('error-message').textContent = 
-          'Erro ao conectar no servidor local (porta 8000) ou vídeo indisponível.';
+        document.getElementById('error-message').textContent = err.message;
         errorBox.classList.remove('hidden');
       } finally {
         btnText.textContent = 'Analisar';
         btnSpinner.classList.add('hidden');
-      }
-    }
 
     // 2. SUBSTITUI A FUNÇÃO startConversion() ORIGINAL (Faz o download real)
     async function startConversion() {
